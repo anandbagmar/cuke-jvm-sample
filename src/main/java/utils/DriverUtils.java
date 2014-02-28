@@ -12,7 +12,9 @@ public class DriverUtils {
         if (driver == null) {
             System.out.println("Init webdriver");
             driver = new FirefoxDriver();
-            driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+            driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+            driver.manage().timeouts().pageLoadTimeout(60,TimeUnit.SECONDS);
+            driver.manage().timeouts().setScriptTimeout(60,TimeUnit.SECONDS);
             driver.manage().window().maximize();
         }
         return driver;
@@ -20,7 +22,7 @@ public class DriverUtils {
 
     public static void resetDriver() {
         System.out.println("Reset webdriver");
-        driver.close();
+        driver.quit();
         driver = null;
     }
 }

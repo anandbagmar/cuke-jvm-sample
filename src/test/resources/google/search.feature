@@ -5,7 +5,6 @@ Feature: Google search feature
     When I search for "<content>"
     Then I see a list of related posts
   Examples:
-    | content |
-    | cucumber_jvm |
+    | content            |
+    | cucumber_jvm       |
     | Essence of Testing |
-
