@@ -1,23 +1,28 @@
 package gradle.cucumber;
 
+import cucumber.api.java.After;
+import cucumber.api.java.Before;
 import cucumber.api.junit.Cucumber;
-import org.junit.AfterClass;
 import org.junit.runner.RunWith;
-import org.testng.annotations.BeforeClass;
 import utils.DriverUtils;
 
 @RunWith(Cucumber.class)
 public class RunCukesTest {
 
-    @BeforeClass
+    @Before
     public void setUp() {
         DriverUtils.getDriver();
+        Runtime.getRuntime().addShutdownHook(new Thread() {
+            public void run() {
+                DriverUtils.quitDriver();
+            }
+        });
     }
 
-    @AfterClass
-    public void tearDown() {
-        System.out.println("Ran the after");
-        DriverUtils.resetDriver();
+    @After
+    public void afterScenario() {
+        
     }
+
 
 }
