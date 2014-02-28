@@ -27,3 +27,7 @@ All other dependent libraries are checked into the lib folder
 Cucumber-html and junit reports are generated and available in
 
     build/reports
+
+## Contact
+
+For any information about this sample project, send an email to abagmar@gmail.com
