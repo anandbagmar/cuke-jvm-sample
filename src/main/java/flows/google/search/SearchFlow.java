@@ -17,6 +17,6 @@ public class SearchFlow {
 
     public void assertSearchResultsFound() {
         SearchPage searchPage = new SearchPage();
-        Assert.assertTrue (searchPage.getNumberOfSearchResults()>0);
+        Assert.assertTrue (searchPage.getNumberOfSearchResults()>10000000);
     }
 }
