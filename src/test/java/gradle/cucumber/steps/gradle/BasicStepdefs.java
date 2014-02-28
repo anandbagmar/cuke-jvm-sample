@@ -1,4 +1,4 @@
-package gradle.cucumber.steps;
+package gradle.cucumber.steps.gradle;
 
 import cucumber.api.java.en.*;
 import flows.gradle.cucumber.Production;
