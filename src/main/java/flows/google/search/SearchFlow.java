@@ -3,6 +3,7 @@ package flows.google.search;
 import pages.PageUtils;
 import pages.SearchPage;
 import org.junit.Assert;
+import utils.RuntimeUtils;
 
 public class SearchFlow {
 
@@ -17,6 +18,9 @@ public class SearchFlow {
 
     public void assertSearchResultsFound() {
         SearchPage searchPage = new SearchPage();
-        Assert.assertTrue (searchPage.getNumberOfSearchResults()>10000000);
+        long numberOfSearchResults = searchPage.getNumberOfSearchResults();
+        System.out.println("***: " + String.valueOf(numberOfSearchResults));
+        RuntimeUtils.taasResponse.put("result_count",String.valueOf(numberOfSearchResults));
+        Assert.assertTrue (numberOfSearchResults>10000000);
     }
 }

@@ -3,6 +3,7 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import utils.DriverUtils;
+import utils.RuntimeUtils;
 
 public class SearchPage {
     private final WebDriver driver;
@@ -15,6 +16,9 @@ public class SearchPage {
     }
 
     public void searchFor(String searchCriteria) {
+        if(RuntimeUtils.taasParams.containsKey("search_for")) {
+            searchCriteria = RuntimeUtils.taasParams.get("search_for");
+        }
         enterSearchCriteria(searchCriteria);
         search();
     }
@@ -28,10 +32,10 @@ public class SearchPage {
         driver.findElement(By.id(searchButtonId)).click();
     }
 
-    public int getNumberOfSearchResults() {
+    public long getNumberOfSearchResults() {
         String numberOfSearchResults = driver.findElement(By.id(numberOfSearchResultsId)).getText();
         numberOfSearchResults = numberOfSearchResults.replaceAll("About ", "").replaceAll(" results.*", "").replaceAll(",","");
         System.out.println("numberOfSearchResults: " + numberOfSearchResults);
-        return Integer.valueOf(numberOfSearchResults);
+        return Long.valueOf(numberOfSearchResults);
     }
 }

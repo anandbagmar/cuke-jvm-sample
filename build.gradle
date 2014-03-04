@@ -2,6 +2,8 @@ import com.sun.tools.javac.resources.compiler
 
 apply plugin: 'java'
 
+defaultTasks 'clean', 'cucumber'
+
 configurations {
     cucumberRuntime {
         extendsFrom testRuntime
@@ -16,11 +18,10 @@ task cucumber() {
             classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
             args = ['-f', 'pretty', '--glue', 'gradle.cucumber', 'src/test/resources',
                     '-f', 'html:build/reports/cucumber-html-report', '-f', 'junit:build/reports/cucumber-junit-report' +
-                    '.xml']
+                    '.xml', '-t', '@taas']
         }
     }
 }
-
 
 dependencies {
     compile fileTree(dir: 'lib', include: ['*.jar'])
