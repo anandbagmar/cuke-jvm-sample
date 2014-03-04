@@ -21,18 +21,26 @@ task cucumber() {
     }
 }
 
-task buildWSClients() {
-    def wsdlURLList = "http://www.webservicex.com/globalweather.asmx?WSDL"
-//    , http://www.webservicex.net/CurrencyConvertor.asmx?WSDL"
-    println "*** wsdlURLList: " + wsdlURLList
+def wsdlList() {
+    def globalWeatherWSDL = [name: "globalWeather", url: "http://www.webservicex.com/globalweather.asmx?WSDL"]
+    def currencyConvertorWSDL = [name: "currencyConvertor", url: "http://www.webservicex.net/CurrencyConvertor.asmx?WSDL"]
+    [globalWeatherWSDL, currencyConvertorWSDL]
+}
 
-    doLast {
-        javaexec {
-            main = "org.apache.cxf.tools.wsdlto.WSDLToJava"
-            classpath = configurations.runtime
-            args = ['-d', 'build/wsdlClients', wsdlURLList]
-        }
-    }
+task buildWSClients() {
+    wsdlList().each() {
+        eachWSDLHash ->
+            def name = eachWSDLHash.name
+            def url = eachWSDLHash.url
+            println "Creating Java Classes for WSDL: ${name} available at: ${url}"
+            doLast {
+                javaexec {
+                    main = "org.apache.cxf.tools.wsdlto.WSDLToJava"
+                    classpath = configurations.runtime
+                    args = ['-d', 'build/WebServiceClients/' + name, url]
+                }
+            }
+    };
 }
 
 dependencies {
