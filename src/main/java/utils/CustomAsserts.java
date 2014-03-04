@@ -9,6 +9,7 @@ public class CustomAsserts {
         } catch (AssertionError ae) {
             System.out.println ("*****Custom Assertion Error" + errorMessage + "*****");
             ae.printStackTrace();
+            throw ae;
         }
     }
 
