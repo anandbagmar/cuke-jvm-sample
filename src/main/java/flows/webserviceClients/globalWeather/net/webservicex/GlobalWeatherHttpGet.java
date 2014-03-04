@@ -1,4 +1,4 @@
-package net.webservicex;
+package flows.webserviceClients.globalWeather.net.webservicex;
 
 import flows.webserviceClients.currencyConvertor.net.webservicex.ObjectFactory;
 
