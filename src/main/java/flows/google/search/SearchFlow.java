@@ -2,7 +2,7 @@ package flows.google.search;
 
 import pages.PageUtils;
 import pages.SearchPage;
-import org.junit.Assert;
+import utils.CustomAsserts;
 
 public class SearchFlow {
 
@@ -17,6 +17,8 @@ public class SearchFlow {
 
     public void assertSearchResultsFound() {
         SearchPage searchPage = new SearchPage();
-        Assert.assertTrue (searchPage.getNumberOfSearchResults()>10000000);
+        long numberOfSearchResults = searchPage.getNumberOfSearchResults();
+        CustomAsserts.assertTrue(numberOfSearchResults > 10000000, "Number of search results less than " +
+                "10000000. Actual results: " + numberOfSearchResults);
     }
 }
