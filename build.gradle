@@ -21,7 +21,21 @@ task cucumber() {
     }
 }
 
+task buildWSClients() {
+    def wsdlURLList = "http://www.webservicex.com/globalweather.asmx?WSDL"
+//    , http://www.webservicex.net/CurrencyConvertor.asmx?WSDL"
+    println "*** wsdlURLList: " + wsdlURLList
+
+    doLast {
+        javaexec {
+            main = "org.apache.cxf.tools.wsdlto.WSDLToJava"
+            classpath = configurations.runtime
+            args = ['-d', 'build/wsdlClients', wsdlURLList]
+        }
+    }
+}
 
 dependencies {
     compile fileTree(dir: 'lib', include: ['*.jar'])
+    runtime fileTree(dir: 'lib/cxf', include: '**/*.jar')
 }
