@@ -11,12 +11,12 @@ import utils.DriverUtils;
 @RunWith(Cucumber.class)
 public class RunCukesTest {
 
-    @Before
+    @Before("@browser")
     public void setUp() {
         DriverUtils.resetWebDriver();
     }
 
-    @After
+    @After("@browser")
     public void takeScreenShot(Scenario scenario) {
         if (scenario.isFailed())
         {
