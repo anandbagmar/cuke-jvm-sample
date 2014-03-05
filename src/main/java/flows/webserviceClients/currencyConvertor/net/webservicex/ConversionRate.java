@@ -37,9 +37,9 @@ import javax.xml.bind.annotation.XmlType;
 public class ConversionRate {
 
     @XmlElement(name = "FromCurrency", required = true)
-    protected flows.webserviceClients.currencyConvertor.net.webservicex.Currency fromCurrency;
+    protected Currency fromCurrency;
     @XmlElement(name = "ToCurrency", required = true)
-    protected flows.webserviceClients.currencyConvertor.net.webservicex.Currency toCurrency;
+    protected Currency toCurrency;
 
     /**
      * Gets the value of the fromCurrency property.
@@ -49,7 +49,7 @@ public class ConversionRate {
      *     {@link Currency }
      *     
      */
-    public flows.webserviceClients.currencyConvertor.net.webservicex.Currency getFromCurrency() {
+    public Currency getFromCurrency() {
         return fromCurrency;
     }
 

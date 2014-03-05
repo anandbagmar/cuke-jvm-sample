@@ -1,9 +1,6 @@
 
 package flows.webserviceClients.currencyConvertor.net.webservicex;
 
-import flows.webserviceClients.currencyConvertor.net.webservicex.ConversionRate;
-import flows.webserviceClients.currencyConvertor.net.webservicex.ConversionRateResponse;
-
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.XmlElementDecl;
 import javax.xml.bind.annotation.XmlRegistry;
