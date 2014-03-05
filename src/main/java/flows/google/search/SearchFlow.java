@@ -18,7 +18,7 @@ public class SearchFlow {
     public void assertSearchResultsFound() {
         SearchPage searchPage = new SearchPage();
         long numberOfSearchResults = searchPage.getNumberOfSearchResults();
-        CustomAsserts.assertTrue("Number of search results less than 10000000. Actual results: " +
-                numberOfSearchResults, numberOfSearchResults > 10000000);
+        CustomAsserts.assertTrue("Number of search results less than 100. Actual results: " +
+                numberOfSearchResults, numberOfSearchResults > 100);
     }
 }
