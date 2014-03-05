@@ -34,11 +34,9 @@ task buildWSClients() {
             def url = eachWSDLHash.url
             println "Creating Java Classes for WSDL: ${name} available at: ${url}"
             doLast {
-                javaexec {
-                    main = "org.apache.cxf.tools.wsdlto.WSDLToJava"
-                    classpath = configurations.runtime
-                    args = ['-validate', '-keep', '-impl', '-client', '-d', 'src/main/java/flows/WebserviceClients/' +
-                            name,
+                exec {
+                    executable = 'wsimport'
+                    args = ['-keep','-verbose', '-Xnocompile',  '-extension','-d','src/main/java','-p', 'flows.webserviceClients.' + name+ '.net.webservices',
                             url]
                 }
             }
@@ -47,5 +45,4 @@ task buildWSClients() {
 
 dependencies {
     compile fileTree(dir: 'lib', include: ['*.jar'])
-    runtime fileTree(dir: 'lib/cxf', include: '**/*.jar')
 }
