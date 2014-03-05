@@ -7,7 +7,6 @@ import cucumber.api.Scenario;
 import org.junit.runner.RunWith;
 import utils.DriverUtils;
 
-
 @RunWith(Cucumber.class)
 public class RunCukesTest {
 
