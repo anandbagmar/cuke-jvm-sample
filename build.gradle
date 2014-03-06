@@ -24,7 +24,10 @@ task cucumber() {
 def wsdlList() {
     def globalWeatherWSDL = [name: "globalWeather", url: "http://www.webservicex.com/globalweather.asmx?WSDL"]
     def currencyConvertorWSDL = [name: "currencyConvertor", url: "http://www.webservicex.net/CurrencyConvertor.asmx?WSDL"]
-    [globalWeatherWSDL, currencyConvertorWSDL]
+    def periodicTableWSDL = [name: "periodicTable", url: "http://www.webservicex.net/periodictable.asmx?WSDL"]
+//    [globalWeatherWSDL, currencyConvertorWSDL, periodicTableWSDL]
+//    [periodicTableWSDL]
+    []
 }
 
 task buildWSClients() {
