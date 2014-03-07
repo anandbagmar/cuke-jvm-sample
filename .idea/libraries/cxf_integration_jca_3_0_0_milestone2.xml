@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="cxf-integration-jca-3.0.0-milestone2">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/cxf/integration/cxf-integration-jca-3.0.0-milestone2.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

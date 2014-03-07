@@ -8,15 +8,40 @@ configurations {
     }
 }
 
+cukeargs = ['--format', 'pretty',
+        '--glue', 'gradle.cucumber', 'src/test/resources',
+        '--format', 'html:build/reports/cucumber-html-report',
+        '--format', 'junit:build/reports/cucumber-junit-report.xml']
+
 task cucumber() {
     dependsOn assemble, compileTestJava
     doLast {
         javaexec {
             main = "cucumber.api.cli.Main"
             classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
-            args = ['-f', 'pretty', '--glue', 'gradle.cucumber', 'src/test/resources',
-                    '-f', 'html:build/reports/cucumber-html-report', '-f', 'junit:build/reports/cucumber-junit-report' +
-                    '.xml']
+            args = cukeargs
+        }
+    }
+}
+
+task cucumberws() {
+    dependsOn assemble, compileTestJava
+    doLast {
+        javaexec {
+            main = "cucumber.api.cli.Main"
+            classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
+            args = cukeargs + ['--tags', '@webservice']
+        }
+    }
+}
+
+task cucumberui() {
+    dependsOn assemble, compileTestJava
+    doLast {
+        javaexec {
+            main = "cucumber.api.cli.Main"
+            classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
+            args = cukeargs + ['--tags', '@browser']
         }
     }
 }
