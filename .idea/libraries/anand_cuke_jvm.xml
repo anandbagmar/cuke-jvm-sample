@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="anand-cuke-jvm">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/build/libs/anand-cuke-jvm.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>
