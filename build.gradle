@@ -16,33 +16,33 @@ cukeargs = ['--format', 'pretty',
 task cucumber() {
     dependsOn assemble, compileTestJava
     doLast {
-        javaexec {
-            main = "cucumber.api.cli.Main"
-            classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
-            args = cukeargs
-        }
+        println("All:")
+        runTest(cukeargs)
     }
 }
 
 task cucumberws() {
     dependsOn assemble, compileTestJava
     doLast {
-        javaexec {
-            main = "cucumber.api.cli.Main"
-            classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
-            args = cukeargs + ['--tags', '@webservice']
-        }
+        println("WS:")
+        runTest(cukeargs + ['--tags', '@webservice'])
     }
 }
 
 task cucumberui() {
     dependsOn assemble, compileTestJava
     doLast {
-        javaexec {
-            main = "cucumber.api.cli.Main"
-            classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
-            args = cukeargs + ['--tags', '@browser']
-        }
+        println("UI:")
+        runTest(cukeargs + ['--tags', '@browser'])
+    }
+}
+
+def runTest(cukeargs1) {
+println "** Cucumber arguments: " +cukeargs1
+    javaexec {
+        main = "cucumber.api.cli.Main"
+        classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
+        args = cukeargs1
     }
 }
 
