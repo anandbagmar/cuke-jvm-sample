@@ -1,5 +1,6 @@
 .idea/libraries/G*.xml
 .idea/workspace.xml
+.idea
 gradle
 .gradle
 build
