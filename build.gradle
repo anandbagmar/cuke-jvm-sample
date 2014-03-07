@@ -37,6 +37,14 @@ task cucumberui() {
     }
 }
 
+task cucumberjson() {
+    dependsOn assemble, compileTestJava
+    doLast {
+        println("Json:")
+        runTest(cukeargs + ['--tags', '@json'])
+    }
+}
+
 def runTest(cukeargs1) {
 println "** Cucumber arguments: " +cukeargs1
     javaexec {
