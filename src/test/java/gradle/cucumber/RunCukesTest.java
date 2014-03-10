@@ -6,12 +6,20 @@ import cucumber.api.junit.Cucumber;
 import cucumber.api.Scenario;
 import org.junit.runner.RunWith;
 import utils.DriverUtils;
+import utils.FileUtils;
+import utils.RuntimeUtils;
+
+import java.io.File;
 
 @RunWith(Cucumber.class)
 public class RunCukesTest {
 
+    @Before()
+    public void commonSetup() {
+    }
+
     @Before("@browser")
-    public void setUp() {
+    public void setUpWebDriver() {
         DriverUtils.resetWebDriver();
     }
 
