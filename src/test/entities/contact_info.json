@@ -1,18 +1,16 @@
 {
     "individual_1": {
-        "street": "51 hope street",
-        "street1": "",
-        "zip": "5345",
-        "city": "brisbane",
-        "state": "QLD",
-        "country": "Australia"
+        "firstName": "John",
+        "lastName": "Doe",
+        "email": "johndoe@somedomain.com",
+        "mobilePhone": "04000789433",
+        "dob": "01/10/1970"
     },
     "individual_2": {
-        "street": "51 hope street",
-        "street1": "",
-        "zip": "5345",
-        "city": "brisbane",
-        "state": "QLD",
-        "country": "Australia"
+        "firstName": "Mary",
+        "lastName": "Ann",
+        "email": "maryann@somedomain.com",
+        "mobilePhone": "072340789433",
+        "dob": "01/10/1987"
     }
 }
