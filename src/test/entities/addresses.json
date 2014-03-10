@@ -8,7 +8,15 @@
         "country": "Australia"
     },
     "bne_res_2": {
-        "street": "51 hope street",
+        "street": "52 hope street",
+        "street1": "",
+        "zip": "5345",
+        "city": "brisbane",
+        "state": "QLD",
+        "country": "Australia"
+    },
+    "bne_res_3": {
+        "street": "53 hope street",
         "street1": "",
         "zip": "5345",
         "city": "brisbane",
