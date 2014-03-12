@@ -26,7 +26,6 @@ public class FileUtils {
 
     public static Object loadJsonEntityFrom(String jsonFile, String section) {
         HashMap jsonFileContent = getJsonFileContent(jsonFile);
-        System.out.println("Loaded: " + jsonFile + ", Section: " + section);
         return jsonFileContent.get(section);
     }
 
