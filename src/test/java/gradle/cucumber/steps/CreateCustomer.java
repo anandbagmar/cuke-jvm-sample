@@ -13,9 +13,5 @@ public class CreateCustomer {
     @Given("^I create a new Individual Customer$")
     public void I_create_a_new_Individual_Customer(DataTable entities) throws Throwable {
         HashMap<String, StringMap> loadedTestData = EntityUtils.getTestDataFromEntities(entities);
-        System.out.println("Loaded Test Data: ");
-        for (Object key : loadedTestData.keySet()) {
-            System.out.println("\t" + key.toString() + " : " + loadedTestData.get(key));
-        }
     }
 }
