@@ -18,8 +18,8 @@ public class EntityUtils {
 
     private static void displayLoadedAndRandomizedTestData(HashMap<String, StringMap> loadedTestData) {
         System.out.println("Loaded / Randomized Test Data: ");
-        for (Object key : loadedTestData.keySet()) {
-            System.out.println("\t" + key.toString() + " : " + loadedTestData.get(key));
+        for (String key : loadedTestData.keySet()) {
+            System.out.println("\t" + key + " : " + loadedTestData.get(key));
         }
     }
 
@@ -56,7 +56,6 @@ public class EntityUtils {
     }
 
     private static StringMap randomize(StringMap<String> randomizeTestData) {
-        System.out.println ("*** Randomize this: " + randomizeTestData);
         for (String key: randomizeTestData.keySet()) {
             String randomizedValue = randomizeTestData.get(key);
             if(key.toLowerCase().contains("name") || key.toLowerCase().contains("street")) {
