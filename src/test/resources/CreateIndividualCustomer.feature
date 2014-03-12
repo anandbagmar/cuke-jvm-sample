@@ -13,7 +13,7 @@ Feature: Test Data Management example
       | entity_type  | data_section_to_use   | randomize   |
       | contact_info | individual_1          | <randomize> |
       | addresses    | <data_section_to_use> | <randomize> |
-    When I randomize some data
+    When I load test data implicitly
 
   Examples:
     | data_section_to_use | randomize |

@@ -10,8 +10,17 @@ import static utils.FileUtils.loadJsonEntityFrom;
 
 public class EntityUtils {
     public static HashMap<String, StringMap>  getTestDataFromEntities(DataTable entities) {
-        HashMap<String, StringMap> loadedTestData = EntityUtils.loadSpecifcSectionsFromJson(entities);
+        HashMap<String, String> loadEntities = EntityUtils.getListofJsonEntitiesToBeLoadedFrom(entities);
+        HashMap<String, StringMap> loadedTestData = EntityUtils.loadSpecifcSectionsFromJson(loadEntities);
         loadedTestData = EntityUtils.randomizeEntities(entities, loadedTestData);
+        displayLoadedAndRandomizedTestData(loadedTestData);
+        return loadedTestData;
+    }
+
+    public static HashMap<String,StringMap> getTestDataFromEntities(String entity_type, String data_section_to_use) {
+        HashMap<String, String> loadEntitity = new HashMap<String, String>();
+        loadEntitity.put(entity_type,data_section_to_use);
+        HashMap<String, StringMap> loadedTestData = EntityUtils.loadSpecifcSectionsFromJson(loadEntitity);
         displayLoadedAndRandomizedTestData(loadedTestData);
         return loadedTestData;
     }
@@ -32,8 +41,7 @@ public class EntityUtils {
         return loadEntities;
     }
 
-    private static HashMap<String, StringMap> loadSpecifcSectionsFromJson(DataTable entities) {
-        HashMap<String, String> loadEntities = EntityUtils.getListofJsonEntitiesToBeLoadedFrom(entities);
+    private static HashMap<String, StringMap> loadSpecifcSectionsFromJson(HashMap<String, String> loadEntities) {
         HashMap<String, StringMap> loadedTestData = new HashMap<String, StringMap>();
         for (String jsonFile : loadEntities.keySet()) {
             StringMap loadedJson = (StringMap) loadJsonEntityFrom(jsonFile, loadEntities.get(jsonFile));
