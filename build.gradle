@@ -8,7 +8,7 @@ configurations {
     }
 }
 
-cukeargs = ['--format', 'pretty',
+def cukeargs = ['--format', 'pretty',
         '--glue', 'gradle.cucumber', 'src/test/resources',
         '--format', 'html:build/reports/cucumber-html-report',
         '--format', 'junit:build/reports/cucumber-junit-report.xml']
