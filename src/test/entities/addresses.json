@@ -19,5 +19,12 @@
         "city": "gold coast",
         "state": "QLD",
         "country": "Australia"
+    },
+    "bne_res_4": {
+        "numberStreet": "54 hope street",
+        "postCode": "5344",
+        "city": "gold coast",
+        "state": "QLD",
+        "country": "Australia"
     }
 }
