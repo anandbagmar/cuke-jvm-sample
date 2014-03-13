@@ -1,10 +1,10 @@
 package utils;
 
 import java.util.HashMap;
-import java.util.Map;
 
 public class RuntimeUtils {
     private static HashMap<String, Object> state = new HashMap<String, Object>();
+
     private RuntimeUtils() {}
 
     public static void saveState(String key, Object value) {

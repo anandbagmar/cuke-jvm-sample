@@ -3,6 +3,7 @@ package utils;
 import cucumber.api.DataTable;
 import gherkin.deps.com.google.gson.internal.StringMap;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.log4j.Logger;
 
 import java.util.*;
 
@@ -26,10 +27,13 @@ public class EntityUtils {
     }
 
     private static void displayLoadedAndRandomizedTestData(HashMap<String, StringMap> loadedTestData) {
-        System.out.println("Loaded / Randomized Test Data: ");
+        Logger logger = (Logger) RuntimeUtils.retrieveState("logger");
+        logger.info("Loaded / Randomized Test Data: ");
+        String displayString = "";
         for (String key : loadedTestData.keySet()) {
-            System.out.println("\t" + key + " : " + loadedTestData.get(key));
+            displayString += ("\n\t" + key + " : " + loadedTestData.get(key));
         }
+        logger.info(displayString);
     }
 
     private static HashMap<String, String> getListofJsonEntitiesToBeLoadedFrom(DataTable entities) {
@@ -87,7 +91,8 @@ public class EntityUtils {
                         + (new Long(random.nextLong()).toString().substring(0,subsetToBeRandomized.length()));
             } while (randomizedString.contains("-"));
         } catch (NumberFormatException nfe) {
-            System.out.println("Invalid number to be randomized: " + toBeRandomized + "\n" + nfe.toString());
+            Logger logger = (Logger) RuntimeUtils.retrieveState("logger");
+            logger.error("Invalid number to be randomized: " + toBeRandomized + "\n" + nfe.toString());
         }
         return randomizedString;
     }

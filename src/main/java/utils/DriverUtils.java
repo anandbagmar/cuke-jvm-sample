@@ -1,5 +1,6 @@
 package utils;
 
+import org.apache.log4j.Logger;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -11,7 +12,8 @@ public class DriverUtils {
     private static WebDriver driver;
 
     private static WebDriver startWebDriver() {
-        System.out.println("Start WebDriver");
+        Logger logger = (Logger) RuntimeUtils.retrieveState("logger");
+        logger.info("Start WebDriver");
         WebDriver d = new FirefoxDriver();
         d.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         d.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
@@ -44,7 +46,8 @@ public class DriverUtils {
     }
 
     public static void quitDriver() {
-        System.out.println("Quit WebDriver");
+        Logger logger = (Logger) RuntimeUtils.retrieveState("logger");
+        logger.info("Quit WebDriver");
         if (driver != null) driver.quit();
         driver = null;
     }

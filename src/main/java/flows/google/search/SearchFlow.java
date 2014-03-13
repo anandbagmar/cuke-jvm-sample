@@ -1,10 +1,11 @@
 package flows.google.search;
 
+import flows.BaseFlow;
 import pages.PageUtils;
 import pages.SearchPage;
 import utils.CustomAsserts;
 
-public class SearchFlow {
+public class SearchFlow extends BaseFlow {
 
     public void navigateToSearchPage() {
         PageUtils.navigateTo("http://www.google.com");
