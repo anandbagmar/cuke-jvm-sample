@@ -2,9 +2,8 @@ package flows.weather;
 
 import com.jayway.jsonpath.JsonPath;
 import flows.BaseFlow;
-import flows.webserviceClients.globalWeather.net.webservicex.GlobalWeather;
-import flows.webserviceClients.globalWeather.net.webservicex.GlobalWeatherSoap;
-import org.apache.log4j.Logger;
+import flows.webserviceClients.globalWeather.GlobalWeather;
+import flows.webserviceClients.globalWeather.GlobalWeatherSoap;
 import utils.FileUtils;
 import utils.RuntimeUtils;
 

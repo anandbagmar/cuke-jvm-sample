@@ -71,7 +71,8 @@ task buildWSClients() {
                 javaexec {
                     main = "org.apache.cxf.tools.wsdlto.WSDLToJava"
                     classpath = configurations.runtime
-                    args = ['-validate', '-keep', '-client', '-d', 'src/main/java/flows/webserviceClients/' +
+                    args = ['-validate', '-keep', '-client', '-d', 'src/main/java', '-p',
+                            'flows.webserviceClients.' +
                             name,
                             url]
                 }
