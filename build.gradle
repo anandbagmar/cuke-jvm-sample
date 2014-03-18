@@ -10,7 +10,8 @@ configurations {
 def defaultCukeArgs = ['--format', 'pretty',
         '--glue', 'gradle/cucumber', 'src/test/resources',
         '--format', 'html:build/reports/cucumber-html-report',
-        '--format', 'junit:build/reports/cucumber-junit-report.xml']
+        '--format', 'junit:build/reports/cucumber-junit-report.xml',
+        '--format', 'json:build/reports/cucumber-json-report.json']
 
 task cucumber() {
     dependsOn assemble, compileTestJava
@@ -45,11 +46,25 @@ task cucumberjson() {
 }
 
 def runTest(cukeArgs) {
-println "** Cucumber arguments: " +cukeArgs
+    println "** Cucumber arguments: " +cukeArgs
     javaexec {
         main = "cucumber.api.cli.Main"
+        jvmArgs '-Dorg.apache.cxf.Logger=org.apache.cxf.common.logging.Log4jLogger'
         classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
         args = cukeArgs
+    }
+//    javaexec {
+//        main = "utils.CustomHTMLReporter"
+//        classpath = configurations.runtime + sourceSets.main.output + sourceSets.test.output
+//    }
+    createHTMLReport();
+}
+
+def createHTMLReport(){
+    println "** createHTMLReport: "
+    javaexec {
+        main = "utils.CustomHTMLReporter"
+        classpath = configurations.runtime + sourceSets.main.output + sourceSets.test.output
     }
 }
 
@@ -70,6 +85,7 @@ task buildWSClients() {
             doLast {
                 javaexec {
                     main = "org.apache.cxf.tools.wsdlto.WSDLToJava"
+                    jvmArgs '-Dorg.apache.cxf.Logger=org.apache.cxf.common.logging.Log4jLogger'
                     classpath = configurations.runtime
                     args = ['-validate', '-keep', '-client', '-d', 'src/main/java', '-p',
                             'flows.webserviceClients.' +
@@ -82,5 +98,5 @@ task buildWSClients() {
 
 dependencies {
     compile fileTree(dir: 'lib', include: ['*.jar'])
-    runtime fileTree(dir: 'lib/cxf', include: '**/*.jar')
+    runtime fileTree(dir: 'lib', include: ['**/*.jar'])
 }
