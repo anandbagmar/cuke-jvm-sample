@@ -52,7 +52,7 @@ public class RunCukesTest {
         try {
             p.load(new FileInputStream(log4JPropertyFile));
             PropertyConfigurator.configure(p);
-            logger.info("Wow! I'm configured!");
+            logger.info("Wow! Logger is configured!");
         } catch (IOException e) {
             e.printStackTrace();
         }

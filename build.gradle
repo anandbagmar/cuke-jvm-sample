@@ -2,8 +2,41 @@ apply plugin: 'java'
 apply plugin: 'idea'
 
 configurations {
+    ajc
+    aspects
+    aspectCompile
+    compile {
+        extendsFrom aspects
+    }
     cucumberRuntime {
         extendsFrom testRuntime
+    }
+}
+
+dependencies {
+    ajc  files('lib/aspectjtools-1.7.4.jar', 'lib/aspectjrt-1.7.4.jar')
+    compile fileTree(dir: 'lib', include: ['**/*.jar'])
+    runtime fileTree(dir: 'lib', include: ['**/*.jar'])
+}
+
+compileJava {
+    println "*** compileJava"
+    doLast {
+        ant.taskdef(
+                resource: "org/aspectj/tools/ant/taskdefs/aspectjTaskdefs.properties",
+                classpath: configurations.compile.asPath)
+        ant.iajc(source: "1.6", target: "1.6",
+                destDir: sourceSets.main.output.classesDir.absolutePath,
+                maxmem: "512m", fork: "true",
+                aspectPath: configurations.aspects.asPath,
+                sourceRootCopyFilter: "src/**/*.java",
+                classpath: "${configurations.compile.asPath};${configurations.aspectCompile.asPath}" ) {
+            sourceroots {
+                sourceSets.main.java.srcDirs.each {
+                    pathelement(location: it.absolutePath)
+                }
+            }
+        }
     }
 }
 
@@ -15,32 +48,32 @@ def defaultCukeArgs = ['--format', 'pretty',
 
 task cucumber() {
     dependsOn assemble, compileTestJava
+    println("All:")
     doLast {
-        println("All:")
         runTest(defaultCukeArgs)
     }
 }
 
 task cucumberws() {
     dependsOn assemble, compileTestJava
+    println("WS:")
     doLast {
-        println("WS:")
         runTest(defaultCukeArgs + ['--tags', '@webservice'])
     }
 }
 
 task cucumberui() {
     dependsOn assemble, compileTestJava
+    println("UI:")
     doLast {
-        println("UI:")
         runTest(defaultCukeArgs + ['--tags', '@browser'])
     }
 }
 
 task cucumberjson() {
     dependsOn assemble, compileTestJava
+    println("Json:")
     doLast {
-        println("Json:")
         runTest(defaultCukeArgs + ['--tags', '@json'])
     }
 }
@@ -53,20 +86,24 @@ def runTest(cukeArgs) {
         classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
         args = cukeArgs
     }
-//    javaexec {
-//        main = "utils.CustomHTMLReporter"
-//        classpath = configurations.runtime + sourceSets.main.output + sourceSets.test.output
-//    }
-    createHTMLReport();
 }
 
-def createHTMLReport(){
+task createHTMLReport() {
     println "** createHTMLReport: "
-    javaexec {
-        main = "utils.CustomHTMLReporter"
-        classpath = configurations.runtime + sourceSets.main.output + sourceSets.test.output
+    dependsOn assemble, compileTestJava
+    doLast {
+        javaexec {
+            main = "utils.CustomHTMLReporter"
+            classpath = configurations.runtime + sourceSets.main.output + sourceSets.test.output
+        }
+
     }
 }
+
+cucumberui.finalizedBy createHTMLReport
+cucumberws.finalizedBy createHTMLReport
+cucumberjson.finalizedBy createHTMLReport
+cucumber.finalizedBy createHTMLReport
 
 def wsdlList() {
     def globalWeatherWSDL = [name: "globalWeather", url: "http://www.webservicex.com/globalweather.asmx?WSDL"]
@@ -94,9 +131,4 @@ task buildWSClients() {
                 }
             }
     };
-}
-
-dependencies {
-    compile fileTree(dir: 'lib', include: ['*.jar'])
-    runtime fileTree(dir: 'lib', include: ['**/*.jar'])
 }
