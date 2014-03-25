@@ -6,6 +6,9 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 public class DriverUtils {
@@ -25,6 +28,20 @@ public class DriverUtils {
     public static byte[] takeScreenShot()
     {
         return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+    }
+
+    public static String saveScreenShotAs(String fileName, String comment) {
+        String savedFileName = fileName;
+        Logger logger = (Logger) RuntimeUtils.retrieveState("logger");
+        Date date = new Date();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM-dd-yyyy h-mm-ssa");
+        String formattedDate = simpleDateFormat.format(date);
+
+        savedFileName = "build/reports/" + FileUtils.getNormalisedFileName(fileName) + "_" + formattedDate + ".png";
+        File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+        screenshot.renameTo(new File(savedFileName));
+        logger.info("\n\t" + comment + "\n\t\tScreen shot saved in: " + savedFileName);
+        return savedFileName;
     }
 
     public static WebDriver resetWebDriver() {

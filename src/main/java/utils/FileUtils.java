@@ -29,6 +29,11 @@ public class FileUtils {
         return jsonFileContent.get(section);
     }
 
+    public static String getNormalisedFileName(String name) {
+        name = name.replaceAll("[^[^a-zA-Z0-9]*]", "");
+        return name.length()>50 ? name.substring(0,50) : name;
+    }
+
 //    public static String getAbsolutePathForEntity(String fileName) {
 //        File f;
 //        String path = "";

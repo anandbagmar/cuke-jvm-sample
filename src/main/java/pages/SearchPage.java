@@ -31,6 +31,7 @@ public class SearchPage extends BasePage {
 
     public int getNumberOfSearchResults() {
         String numberOfSearchResults = driver.findElement(By.id(numberOfSearchResultsId)).getText();
+        DriverUtils.saveScreenShotAs("getNumberOfSearchResults", "Search results: " + numberOfSearchResults);
         numberOfSearchResults = numberOfSearchResults.replaceAll("About ", "").replaceAll(" results.*", "").replaceAll(",","");
         logger.info("numberOfSearchResults: " + numberOfSearchResults);
         return Integer.valueOf(numberOfSearchResults);
