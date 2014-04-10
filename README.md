@@ -1,10 +1,30 @@
 cuke-jvm-sample
 ===============
 
-A sample repo to understand and use cucumber-jvm
+
+A sample Test Automation Framework to understand and use cucumber-jvm
+
+---------------
+
+
+## What is implemented in this sample Test Automation Framework?
+
+* Tests specified using [cucumber-jvm](http://cukes.info/install-cucumber-jvm.html)
+* Build tool: [Gradle](http://gradle.org/)
+* Programming language: [Groovy (for Gradle)](http://groovy.codehaus.org/) and Java
+* Test Data Management: Samples to use data-specified in feature files, AND use data from separate json files
+* Browser automation: Using [WebDriver](http://code.google.com/p/selenium/wiki/GettingStarted) for browser interaction
+* Web Service automation: Using [cxf library](http://cxf.apache.org/) to generate client code from web service WSDL files,
+and invoke methods on the same
+* Take screenshots on demand and save on disk
+* Integrated [cucumber-reports](https://github.com/masterthought/cucumber-reporting) to get 'pretty' and 'meaningful' reports from test execution
+* Using [apache logger](http://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/Logger.html) for storing test logs in files (and also report to console)
+* Using [aspectJ](http://eclipse.org/aspectj/) to do byte code injection to automatically log test trace to file. Also creating a separate benchmarks file to track time taken by each method. This information can be mapped separately in other tools like Excel to identify patterns of test execution.
+
+---------------
+
 
 ## Usage Steps:
----------------
 
 ### Install / configure Gradle:
 
@@ -51,3 +71,5 @@ Cucumber-html and junit reports are generated and available in
 ## Contact
 
 For any information about this sample project, send an email to abagmar@gmail.com
+
+---------------
