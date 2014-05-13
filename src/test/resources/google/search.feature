@@ -5,6 +5,7 @@ Feature: Google search feature
     Given I am on the google search page
     When I search for "<content>"
     Then I see a list of related posts
+
   Examples:
     | content            |
     | cucumber_jvm       |

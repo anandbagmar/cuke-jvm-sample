@@ -1,12 +1,13 @@
-package pages;
+package pages.google;
 
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import pages.BasePage;
+import pages.BaseUIPage;
 import utils.DriverUtils;
 
-public class SearchPage extends BasePage {
-    private final WebDriver driver;
+public class SearchPage extends BaseUIPage {
     private String searchInputBoxId = "gbqfq";
     private String searchButtonId = "gbqfb";
     private String numberOfSearchResultsId = "resultStats";

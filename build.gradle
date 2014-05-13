@@ -62,6 +62,14 @@ task cucumberws() {
     }
 }
 
+task mifosx() {
+    dependsOn assemble, compileTestJava
+    println("MifosX Demo App Test:")
+    doLast {
+        runTest(defaultCukeArgs + ['--tags', '@mifosx'])
+    }
+}
+
 task cucumberui() {
     dependsOn assemble, compileTestJava
     println("UI:")
@@ -103,6 +111,7 @@ task createHTMLReport() {
 cucumberui.finalizedBy createHTMLReport
 cucumberws.finalizedBy createHTMLReport
 cucumberjson.finalizedBy createHTMLReport
+mifosx.finalizedBy createHTMLReport
 cucumber.finalizedBy createHTMLReport
 
 def wsdlList() {

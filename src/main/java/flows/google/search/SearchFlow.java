@@ -1,8 +1,8 @@
 package flows.google.search;
 
 import flows.BaseFlow;
-import pages.PageUtils;
-import pages.SearchPage;
+import utils.PageUtils;
+import pages.google.SearchPage;
 import utils.CustomAsserts;
 
 public class SearchFlow extends BaseFlow {
