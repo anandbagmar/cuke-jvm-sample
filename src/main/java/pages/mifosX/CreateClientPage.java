@@ -20,6 +20,7 @@ public class CreateClientPage extends BaseUIPage {
         PageUtils.navigateTo(("https://demo.openmf.org/#/createclient"));
         DriverUtils.saveScreenShotAs("Create Client Page", "");
 
+        logger.info(("Create Client for: " + firstName + ", " + lastName));
         driver.findElement(By.id(firstNameID)).sendKeys(firstName);
         driver.findElement(By.id(lastNameID)).sendKeys(lastName);
         driver.findElement(By.id(submitButtonID)).click();
