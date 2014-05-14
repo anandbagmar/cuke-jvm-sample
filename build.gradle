@@ -134,7 +134,7 @@ task buildWSClients() {
                     jvmArgs '-Dorg.apache.cxf.Logger=org.apache.cxf.common.logging.Log4jLogger'
                     classpath = configurations.runtime
                     args = ['-validate', '-keep', '-client', '-d', 'src/main/java', '-p',
-                            'flows.webserviceClients.' +
+                            'businessLayer.webserviceClients.' +
                             name,
                             url]
                 }
