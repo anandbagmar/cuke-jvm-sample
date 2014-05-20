@@ -7,7 +7,6 @@ import utils.DriverUtils;
 import utils.RuntimeUtils;
 
 public class CreateClientPage extends BaseUIPage {
-    private String officeID = "";
     private String firstNameID = "firstname";
     private String lastNameID = "lastname";
     private String submitButtonID = "save";

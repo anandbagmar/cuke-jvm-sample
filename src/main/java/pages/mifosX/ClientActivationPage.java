@@ -3,11 +3,11 @@ package pages.mifosX;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import pages.BaseUIPage;
+import utils.DateUtils;
 import utils.PageUtils;
 import utils.RuntimeUtils;
 
 public class ClientActivationPage extends BaseUIPage {
-    private String activationDate = "15 May 2014";
     private String submitActivationDateID = "save";
 
     public ClientActivationPage() {
@@ -29,6 +29,6 @@ public class ClientActivationPage extends BaseUIPage {
     private void enterActivationDate() {
         WebElement parentDiv = driver.findElement(By.cssSelector("div[ng-show=showActivationDateField]"));
         parentDiv.findElement(By.cssSelector("input#activationDate")).click();
-        parentDiv.findElement(By.cssSelector("input#activationDate")).sendKeys(activationDate);
+        parentDiv.findElement(By.cssSelector("input#activationDate")).sendKeys(DateUtils.getTodaysDate());
     }
 }

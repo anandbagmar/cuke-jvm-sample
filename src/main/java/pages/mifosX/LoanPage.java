@@ -3,6 +3,7 @@ package pages.mifosX;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import pages.BaseUIPage;
+import utils.DateUtils;
 import utils.DriverUtils;
 import utils.PageUtils;
 import utils.RuntimeUtils;
@@ -27,9 +28,7 @@ public class LoanPage extends BaseUIPage{
     private String transactionProcessingStrategy = "Mifos style";
     private String inArrearsToleranceID = "1000";
     private String submittedOnDateID = "input#submittedOnDate";
-    private String submittedOnDate = "15 May 2014";
     private String expectedDisbursementDateID = "input#expectedDisbursementDate";
-    private String expectedDisbursementDate = "14 May 2014";
 
     public LoanPage() {
         RuntimeUtils.saveState("currentPage", this);
@@ -41,8 +40,8 @@ public class LoanPage extends BaseUIPage{
 
     public void addLoan(String product) {
         selectLoanProduct(product);
-        enterDate("div[ng-controller=NewLoanAccAppController]", submittedOnDateID, submittedOnDate);
-        enterDate("div[ng-controller=NewLoanAccAppController]", expectedDisbursementDateID, expectedDisbursementDate);
+        enterDate("div[ng-controller=NewLoanAccAppController]", submittedOnDateID, DateUtils.getTodaysDate());
+        enterDate("div[ng-controller=NewLoanAccAppController]", expectedDisbursementDateID, DateUtils.getTodaysDate());
         PageUtils.enterValueInInputBox(driver, principalID, principal);
         PageUtils.enterValueInInputBox(driver, loanTermFrequencyID, loanTermFrequency);
         PageUtils.selectFromDropDown(driver, loanTermFrequencyTypeID, loanTermFrequencyType);
