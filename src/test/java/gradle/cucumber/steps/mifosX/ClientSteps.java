@@ -16,6 +16,5 @@ public class ClientSteps {
     public void I_activate_the_client_today() throws Throwable {
         Client client = new Client();
         client.activateClient();
-
     }
 }

@@ -7,8 +7,7 @@ import utils.PageUtils;
 import utils.RuntimeUtils;
 
 public class ClientActivationPage extends BaseUIPage {
-    private String activationDateID = "activationDate";
-    private String activationDate = "14 May 2014";
+    private String activationDate = "15 May 2014";
     private String submitActivationDateID = "save";
 
     public ClientActivationPage() {

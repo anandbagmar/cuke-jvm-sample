@@ -17,6 +17,7 @@ dependencies {
     ajc  files('lib/aspectjtools-1.7.4.jar', 'lib/aspectjrt-1.7.4.jar')
     compile fileTree(dir: 'lib', include: ['**/*.jar'])
     runtime fileTree(dir: 'lib', include: ['**/*.jar'])
+    testCompile files("lib/phantomjs")
 }
 
 compileJava {
@@ -46,11 +47,13 @@ def defaultCukeArgs = ['--format', 'pretty',
         '--format', 'junit:build/reports/cucumber-junit-report.xml',
         '--format', 'json:build/reports/cucumber-json-report.json']
 
+
+
 task cucumber() {
     dependsOn assemble, compileTestJava
     println("All:")
     doLast {
-        runTest(defaultCukeArgs)
+        runUITest(defaultCukeArgs)
     }
 }
 
@@ -58,7 +61,7 @@ task cucumberws() {
     dependsOn assemble, compileTestJava
     println("WS:")
     doLast {
-        runTest(defaultCukeArgs + ['--tags', '@webservice'])
+        runUITest(defaultCukeArgs + ['--tags', '@webservice'])
     }
 }
 
@@ -66,7 +69,15 @@ task mifosx() {
     dependsOn assemble, compileTestJava
     println("MifosX Demo App Test:")
     doLast {
-        runTest(defaultCukeArgs + ['--tags', '@mifosx'])
+        runUITest(defaultCukeArgs + ['--tags', '@mifosx'])
+    }
+}
+
+task mifosx_noui() {
+    dependsOn assemble, compileTestJava
+    println("MifosX Demo App Headless Test:")
+    doLast {
+        runHeadlessTest(defaultCukeArgs + ['--tags', '@mifosx'])
     }
 }
 
@@ -74,7 +85,7 @@ task cucumberui() {
     dependsOn assemble, compileTestJava
     println("UI:")
     doLast {
-        runTest(defaultCukeArgs + ['--tags', '@browser'])
+        runUITest(defaultCukeArgs + ['--tags', '@browser'])
     }
 }
 
@@ -82,22 +93,33 @@ task cucumberjson() {
     dependsOn assemble, compileTestJava
     println("Json:")
     doLast {
-        runTest(defaultCukeArgs + ['--tags', '@json'])
+        runUITest(defaultCukeArgs + ['--tags', '@json'])
     }
 }
 
-def runTest(cukeArgs) {
+def runUITest(cukeArgs) {
+    defaultJVMArgs = ["-Dorg.apache.cxf.Logger=org.apache.cxf.common.logging.Log4jLogger"]
+    runTest(cukeArgs, defaultJVMArgs)
+}
+
+def runHeadlessTest(cukeArgs) {
+    defaultJVMArgs = ["-Dorg.apache.cxf.Logger=org.apache.cxf.common.logging.Log4jLogger", "-DdriverType=phantomjs"]
+    runTest(cukeArgs, defaultJVMArgs)
+}
+
+def runTest(cukeArgs, customJVMArgs) {
     println "** Cucumber arguments: " +cukeArgs
+    println "** JVM arguments: " + customJVMArgs
     javaexec {
         main = "cucumber.api.cli.Main"
-        jvmArgs '-Dorg.apache.cxf.Logger=org.apache.cxf.common.logging.Log4jLogger'
+        jvmArgs = customJVMArgs
         classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
         args = cukeArgs
     }
 }
 
 task createHTMLReport() {
-    println "** createHTMLReport: "
+    println "Create HTML Report: "
     dependsOn assemble, compileTestJava
     doLast {
         javaexec {
@@ -112,6 +134,7 @@ cucumberui.finalizedBy createHTMLReport
 cucumberws.finalizedBy createHTMLReport
 cucumberjson.finalizedBy createHTMLReport
 mifosx.finalizedBy createHTMLReport
+mifosx_noui.finalizedBy createHTMLReport
 cucumber.finalizedBy createHTMLReport
 
 def wsdlList() {

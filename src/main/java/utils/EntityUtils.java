@@ -9,7 +9,7 @@ import java.util.*;
 
 import static utils.FileUtils.loadJsonEntityFrom;
 
-public class EntityUtils {
+public class EntityUtils extends BaseUtils {
     public static HashMap<String, StringMap>  getTestDataFromEntities(DataTable entities) {
         HashMap<String, String> loadEntities = EntityUtils.getListofJsonEntitiesToBeLoadedFrom(entities);
         HashMap<String, StringMap> loadedTestData = EntityUtils.loadSpecifcSectionsFromJson(loadEntities);
@@ -27,7 +27,7 @@ public class EntityUtils {
     }
 
     private static void displayLoadedAndRandomizedTestData(HashMap<String, StringMap> loadedTestData) {
-        Logger logger = (Logger) RuntimeUtils.retrieveState("logger");
+        logger = (Logger) RuntimeUtils.retrieveState("logger");
         logger.info("Loaded / Randomized Test Data: ");
         String displayString = "";
         for (String key : loadedTestData.keySet()) {
@@ -81,6 +81,7 @@ public class EntityUtils {
     }
 
     private static String randomizePhoneNumber(String toBeRandomized) {
+        logger = (Logger) RuntimeUtils.retrieveState("logger");
         String randomizedString = toBeRandomized;
         try {
             String subsetToBeRandomized = toBeRandomized.substring(toBeRandomized.length()/2);
@@ -91,7 +92,6 @@ public class EntityUtils {
                         + (new Long(random.nextLong()).toString().substring(0,subsetToBeRandomized.length()));
             } while (randomizedString.contains("-"));
         } catch (NumberFormatException nfe) {
-            Logger logger = (Logger) RuntimeUtils.retrieveState("logger");
             logger.error("Invalid number to be randomized: " + toBeRandomized + "\n" + nfe.toString());
         }
         return randomizedString;

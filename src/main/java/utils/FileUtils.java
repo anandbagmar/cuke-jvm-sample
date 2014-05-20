@@ -8,7 +8,7 @@ import org.json.XML;
 import java.io.*;
 import java.util.HashMap;
 
-public class FileUtils {
+public class FileUtils extends BaseUtils {
     public static String convertStringToJsonString(String xmlSource) {
         JSONObject xmlJSONObj;
         String jsonPrettyPrintString = "";

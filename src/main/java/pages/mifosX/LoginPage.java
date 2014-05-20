@@ -15,6 +15,11 @@ public class LoginPage extends BaseUIPage {
         RuntimeUtils.saveState("currentPage", this);
 
         PageUtils.navigateTo("https://demo.openmf.org");
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         driver.findElement(By.id(userNameInputBoxID)).sendKeys(username);
         driver.findElement(By.id(passwordInputBoxID)).sendKeys(password);
         driver.findElement(By.id(signInButtonID)).click();

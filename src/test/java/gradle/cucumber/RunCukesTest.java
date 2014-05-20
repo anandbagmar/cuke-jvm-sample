@@ -10,6 +10,7 @@ import org.junit.runner.RunWith;
 import utils.DriverUtils;
 import utils.RuntimeUtils;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
@@ -20,15 +21,17 @@ public class RunCukesTest {
 
     @Before()
     public void commonSetup() {
+        String baseDir = (String) RuntimeUtils.saveState("BASEDIR", System.getProperty("user.dir"));
         logger = setupLogger();
         logger.info("In Common Before Hook");
+        logger.info("BASEDIR: " + baseDir);
     }
 
     @Before("@browser")
-    public void setUpWebDriver() {
+    public void setUpDriver() {
         logger = (Logger) RuntimeUtils.retrieveState("logger");
         logger.info("In @browser Before Hook");
-        DriverUtils.resetWebDriver();
+        DriverUtils.resetDriver();
     }
 
     @After("@browser")
@@ -45,18 +48,21 @@ public class RunCukesTest {
     }
 
     private Logger setupLogger() {
-        logger = Logger.getLogger("testExecutionLogger");
-        String log4JPropertyFile = "src/main/resources/log4j.properties";
-        Properties p = new Properties();
+        if (null==RuntimeUtils.retrieveState("logger")) {
+            logger = Logger.getLogger("testExecutionLogger");
+            String baseDir = (String) RuntimeUtils.retrieveState("BASEDIR");
+            String log4JPropertyFile = baseDir + "/src/main/resources/log4j.properties";
+            Properties p = new Properties();
 
-        try {
-            p.load(new FileInputStream(log4JPropertyFile));
-            PropertyConfigurator.configure(p);
-            logger.info("Wow! Logger is configured!");
-        } catch (IOException e) {
-            e.printStackTrace();
+            try {
+                p.load(new FileInputStream(log4JPropertyFile));
+                PropertyConfigurator.configure(p);
+                logger.info("Wow! Logger is configured!");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            RuntimeUtils.saveState("logger", logger);
         }
-        RuntimeUtils.saveState("logger", logger);
         return logger;
     }
 }

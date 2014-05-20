@@ -20,7 +20,10 @@ public class MyAspects {
         String className = signature.getDeclaringTypeName();
         Method method = signature.getMethod();
         String methodName = method.getName();
-        if (!(className.contains("AbstractBase") || className.contains("webServiceProxies"))) {
+        if (!(className.contains("AbstractBase")
+                || className.contains("webServiceProxies")
+                || (className.contains("RuntimeUtils"))
+                || (className.contains("DriverUtils")))) {
             logger.info("Class: " + className + ", Method: " + methodName);
         }
         long startingTime = (new Date()).getTime();

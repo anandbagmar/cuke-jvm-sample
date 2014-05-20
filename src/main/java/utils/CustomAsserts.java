@@ -2,14 +2,13 @@ package utils;
 
 import org.apache.log4j.Logger;
 import org.junit.Assert;
-
 import java.util.ArrayList;
 
-public class CustomAsserts {
+public class CustomAsserts extends BaseUtils {
     private static ArrayList<String> verificationFailures = new ArrayList<String>();
 
     public static void assertTrue(String errorMessage, boolean condition) {
-        Logger logger = (Logger) RuntimeUtils.retrieveState("logger");
+        logger = (Logger) RuntimeUtils.retrieveState("logger");
         try {
             Assert.assertTrue(condition);
         } catch (AssertionError ae) {
