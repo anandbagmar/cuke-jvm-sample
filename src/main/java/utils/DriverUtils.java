@@ -5,6 +5,7 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.sikuli.webdriver.SikuliFirefoxDriver;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -13,11 +14,17 @@ import java.util.concurrent.TimeUnit;
 
 public class DriverUtils {
     private static WebDriver driver;
+    public static boolean isSikuli;
 
     private static WebDriver startWebDriver() {
         Logger logger = (Logger) RuntimeUtils.retrieveState("logger");
         logger.info("Start WebDriver");
-        WebDriver d = new FirefoxDriver();
+        WebDriver d;
+        if (isSikuli) {
+            d = new SikuliFirefoxDriver();
+        } else {
+            d = new FirefoxDriver();
+        }
         d.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         d.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
         d.manage().timeouts().setScriptTimeout(60,TimeUnit.SECONDS);

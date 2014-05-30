@@ -31,6 +31,19 @@ public class RunCukesTest {
         DriverUtils.resetWebDriver();
     }
 
+    @Before("@sikuli")
+    public void setUpSikuliWebDriver() {
+        logger = (Logger) RuntimeUtils.retrieveState("logger");
+        logger.info("In @sikuli Before Hook");
+        DriverUtils.isSikuli = true;
+        DriverUtils.resetWebDriver();
+    }
+
+    @After("@sikuli")
+    public void closeSikuliDriver(){
+        DriverUtils.quitDriver();
+    }
+
     @After("@browser")
     public void takeScreenShot(Scenario scenario) {
         logger = (Logger) RuntimeUtils.retrieveState("logger");
