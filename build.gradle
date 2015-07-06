@@ -78,6 +78,28 @@ task cucumberjson() {
     }
 }
 
+task scenarios() {
+    dependsOn assemble, compileTestJava
+    println("Get scenarios:")
+    if ( project.hasProperty("run") ) {
+        println("Found custom tags to execute: " + project.getProperty("run"))
+    }
+    doLast {
+        runTest(defaultCukeArgs + ['-d', '--tags', project.getProperty("run")])
+    }
+}
+
+task custom() {
+    dependsOn assemble, compileTestJava
+    println("Custom tags:")
+    if ( project.hasProperty("run") ) {
+        println("Found custom tags to execute: " + project.getProperty("run"))
+    }
+    doLast {
+        runTest(defaultCukeArgs + ['--tags', project.getProperty("run")])
+    }
+}
+
 def runTest(cukeArgs) {
     println "** Cucumber arguments: " +cukeArgs
     javaexec {
